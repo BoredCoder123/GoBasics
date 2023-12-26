@@ -2,6 +2,7 @@ package greetings
 
 import "fmt"
 import "errors"
+import "math/rand"
 
 func Hello(name string) (string, error) {
 
@@ -9,6 +10,19 @@ func Hello(name string) (string, error) {
 		return "", errors.New("Name cannot be empty")
 	}
 
-	message := fmt.Sprintf("Hi, %v. Welcome!", name)
+	// message := fmt.Sprintf("Hi, %v. Welcome!", name)
+	// return message, nil
+
+	message := fmt.Sprintf(randomFormat(), name)
 	return message, nil
+}
+
+func randomFormat() string {
+    formats := []string{
+		"Hi, %v. Welcome!",
+		"Great to see you, %v!",
+		"Hail, %v!, well met!",
+	}
+
+	return formats[rand.Intn(len(formats))]
 }
